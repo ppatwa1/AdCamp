@@ -47,23 +47,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			 <!-- <plugin>
-				<configuration>
-	  			 	<groups>com.FIS.AdWebService.Test.IntegrationTest</groups>
-		 		</configuration>
-		 		  <executions>
-	                    <execution>
-	                        <goals>
-	                            <goal>integration-test</goal>
-	                        </goals>
-	                        <configuration>
-	                            <includes>
-	                                <include>**/*.class</include>
-	                            </includes>
-	                        </configuration>
-	                    </execution>
-	                </executions>
-			</plugin> -->
 		</plugins>
 	</build>
 	<repositories>

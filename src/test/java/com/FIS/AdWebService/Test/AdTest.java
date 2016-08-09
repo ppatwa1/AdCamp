@@ -15,7 +15,6 @@ import com.FIS.AdWebService.Service.AdService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
-@Category(IntegrationTest.class)
 public class AdTest {
 
 	private AdService adService = new AdService();
