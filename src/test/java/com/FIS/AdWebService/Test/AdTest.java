@@ -3,7 +3,6 @@ package com.FIS.AdWebService.Test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -32,7 +31,7 @@ public class AdTest {
 		getAllAd();
 	}
 	
-	//Test to get active Ad given a partner_id
+	//Test to get active Ad given a partnerId
 	@Test
 	public void getSingleAd() throws InterruptedException{
 		addAd1Success();
@@ -109,6 +108,7 @@ public class AdTest {
 		assertEquals(resp.getRespCd(), 0);
 	}
 	
+	//Test to verify if isAdActive returns true
 	@Test
 	public void isAdActive(){
 		AdRequest adRequest = new AdRequest();
@@ -117,6 +117,7 @@ public class AdTest {
 		assertEquals(isActive,true);
 	}
 	
+	//Test to verify isAdActive returns false
 	@Test
 	public void isAdInactive(){
 		AdRequest adRequest = new AdRequest();
@@ -125,6 +126,7 @@ public class AdTest {
 		assertEquals(isActive,false);
 	}
 	
+	//Method to retrieve all Ads
 	public void getAllAd()
 	{
 		AdResponse resp = new AdResponse();
@@ -133,6 +135,7 @@ public class AdTest {
 		assertEquals(resp.getAdInfo().size(),5);
 	}
 	
+	//Method to retrieve a single Ad by passing partnerId
 	public void getAdSuccess()
 	{
 		AdResponse resp = new AdResponse();

@@ -14,10 +14,12 @@ public class AdService {
 
 	private ConcurrentHashMap<String, List<AdRequest>> adMap = new ConcurrentHashMap<String, List<AdRequest>>();
 
+	//Method to retrieve active Ad information for a partner based on partnerId
 	public AdResponse getAd(String partnerId) {
 		List<AdRequest> adList = new ArrayList<AdRequest>();
 		AdResponse response = new AdResponse();
 		if (adMap.containsKey(partnerId)) {
+			//If Ad already exists for the partner, check if the Ad is active
 			if (getActiveAdForPartner(partnerId) != null) {
 				adList.add(getActiveAdForPartner(partnerId));
 				response.setAdInfo(adList);
@@ -34,6 +36,7 @@ public class AdService {
 		return response;
 	}
 
+	//Method to create a new Ad, also supports adding multiple Ads for a partner
 	public AdResponse createAd(AdRequest newAd) {
 		AdResponse response = new AdResponse();
 		List<AdRequest> adList = new ArrayList<AdRequest>();
@@ -61,24 +64,7 @@ public class AdService {
 		return response;
 	}
 
-	public boolean isAdActive(AdRequest newAd) {
-		long currentTimeInSec = System.currentTimeMillis() / 1000;
-		return (currentTimeInSec < newAd.getAdEndTime());
-	}
-
-	private AdRequest getActiveAdForPartner(String partnerId) {
-		AdRequest activeAd;
-		List<AdRequest> ad = new ArrayList<AdRequest>();
-		ad = adMap.get(partnerId);
-		Iterator<AdRequest> adItr = ad.iterator();
-		while (adItr.hasNext()) {
-			activeAd = adItr.next();
-			if (isAdActive(activeAd))
-				return activeAd;
-		}
-		return null;
-	}
-
+	//Method to get data for all campaigns
 	public AdResponse getAllAd() {
 		AdResponse response = new AdResponse();
 		List<AdRequest> adReq = new ArrayList<AdRequest>();
@@ -92,5 +78,25 @@ public class AdService {
 			response.setRespCd(Constants.SUCCESS_CD);
 		}
 		return response;
+	}
+	
+	//Method to verify if a Ad is active based on currentTime
+	public boolean isAdActive(AdRequest newAd) {
+		long currentTimeInSec = System.currentTimeMillis() / 1000;
+		return (currentTimeInSec < newAd.getAdEndTime());
+	}
+
+	//Method to rerieve active Ad if a partner has multiple Ads
+	private AdRequest getActiveAdForPartner(String partnerId) {
+		AdRequest activeAd;
+		List<AdRequest> ad = new ArrayList<AdRequest>();
+		ad = adMap.get(partnerId);
+		Iterator<AdRequest> adItr = ad.iterator();
+		while (adItr.hasNext()) {
+			activeAd = adItr.next();
+			if (isAdActive(activeAd))
+				return activeAd;
+		}
+		return null;
 	}
 }
