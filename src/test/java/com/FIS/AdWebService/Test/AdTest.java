@@ -19,6 +19,8 @@ public class AdTest {
 
 	private AdService adService = new AdService();
 	
+	
+	//Test to add multiple ads for one partner and retrieving all campaigns 
 	@Test
 	public void getAllAds() throws InterruptedException{
 		addAd1Success();
@@ -30,6 +32,7 @@ public class AdTest {
 		getAllAd();
 	}
 	
+	//Test to get active Ad given a partner_id
 	@Test
 	public void getSingleAd() throws InterruptedException{
 		addAd1Success();
