@@ -2,16 +2,16 @@ package com.FIS.AdWebService.Entity;
 
 public class AdRequest {
 
-	String partnerId;
+	String partner_id;
 	int duration;
-	String adContent;
+	String ad_content;
 	long adEndTime;
 	
 	public String getPartnerId() {
-		return partnerId;
+		return partner_id;
 	}
 	public void setPartnerId(String partnerId) {
-		this.partnerId = partnerId;
+		this.partner_id = partnerId;
 	}
 	public int getDuration() {
 		return duration;
@@ -20,10 +20,10 @@ public class AdRequest {
 		this.duration = duration;
 	}
 	public String getAdContent() {
-		return adContent;
+		return ad_content;
 	}
 	public void setAdContent(String adContent) {
-		this.adContent = adContent;
+		this.ad_content = adContent;
 	}
 	public long getAdEndTime() {
 		return adEndTime;
