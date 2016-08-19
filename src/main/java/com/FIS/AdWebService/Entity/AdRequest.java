@@ -1,3 +1,9 @@
+/*
+ * @Author Prachi Patwa
+ * 
+ * AdResponse class has structure of request when an Ad is created and its details
+ * 
+ */
 package com.FIS.AdWebService.Entity;
 
 public class AdRequest {

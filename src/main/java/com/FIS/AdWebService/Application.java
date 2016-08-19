@@ -1,3 +1,10 @@
+/*
+ * @Author Prachi Patwa
+ * 
+ *Source of definition for Application
+ *Tells Spring to look for Components and Services in com.FIA.AdWebService package
+ * 
+ */
 package com.FIS.AdWebService;
 
 import org.springframework.boot.SpringApplication;

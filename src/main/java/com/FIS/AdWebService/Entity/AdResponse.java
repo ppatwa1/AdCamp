@@ -1,3 +1,9 @@
+/*
+ * @Author Prachi Patwa
+ * 
+ * The AdResponse class has structure of the output when GET request is received
+ * 
+ */
 package com.FIS.AdWebService.Entity;
 
 import java.util.List;

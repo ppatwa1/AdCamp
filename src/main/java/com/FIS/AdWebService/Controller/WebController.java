@@ -1,3 +1,10 @@
+/*
+ * @Author Prachi Patwa
+ * 
+ * The WebController class is annotated as a @RestController, meaning it’s 
+ * ready for use by Spring MVC to handle web requests.
+ * 
+ */
 package com.FIS.AdWebService.Controller;
 
 import java.io.IOException;

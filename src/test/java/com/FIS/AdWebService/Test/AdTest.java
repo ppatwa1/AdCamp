@@ -1,3 +1,7 @@
+/*
+ * @Author Prachi Patwa
+ * 
+ */
 package com.FIS.AdWebService.Test;
 
 import static org.junit.Assert.*;
@@ -40,6 +44,46 @@ public class AdTest {
 		getAdSuccess();
 	}
 
+	@Test
+	public void addAdFailure1(){
+		AdRequest request = new AdRequest();
+		request.setDuration(5);
+		request.setAdContent("Partner Id missing");
+		AdResponse resp = new AdResponse();
+		resp = adService.createAd(request);
+		assertEquals(resp.getRespCd(),405);
+	}
+	
+	@Test
+	public void addAdFailure2(){
+		AdRequest request = new AdRequest();
+		request.setPartnerId("Partner 1");
+		request.setDuration(5);
+		AdResponse resp = new AdResponse();
+		resp = adService.createAd(request);
+		assertEquals(resp.getRespCd(),405);
+	}
+	
+	@Test
+	public void addAdFailure3(){
+		AdRequest request = new AdRequest();
+		request.setPartnerId("Partner 1");
+		request.setAdContent("Partner Id missing");
+		AdResponse resp = new AdResponse();
+		resp = adService.createAd(request);
+		assertEquals(resp.getRespCd(),405);
+	}
+	
+	@Test
+	public void addAdFailure4(){
+		AdRequest request = new AdRequest();
+		request.setDuration(5);
+		request.setPartnerId("all");
+		request.setAdContent("Partner Id missing");
+		AdResponse resp = new AdResponse();
+		resp = adService.createAd(request);
+		assertEquals(resp.getRespCd(),405);
+	}
 	
 	public void addAd1Success() {
 		AdRequest request = new AdRequest();
@@ -48,7 +92,8 @@ public class AdTest {
 		request.setAdContent("TEST AD1");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(), 0);
+	//	System.out.println("Response URL:"  + resp.getRespMsg());
+		assertEquals(resp.getRespCd(), 201);
 	}
 	
 	
@@ -59,7 +104,7 @@ public class AdTest {
 		request.setAdContent("TEST AD12");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(), 1);
+		assertEquals(resp.getRespCd(), 405);
 	}
 	
 	
@@ -71,7 +116,7 @@ public class AdTest {
 		request.setAdContent("TEST AD Success");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(), 0);
+		assertEquals(resp.getRespCd(), 201);
 	}
 	
 	
@@ -83,7 +128,7 @@ public class AdTest {
 		request.setAdContent("TEST AD2");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(), 0);
+		assertEquals(resp.getRespCd(), 201);
 	}
 	
 	
@@ -94,7 +139,7 @@ public class AdTest {
 		request.setAdContent("TEST AD3");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(), 0);
+		assertEquals(resp.getRespCd(), 201);
 	}
 	
 
@@ -105,7 +150,7 @@ public class AdTest {
 		request.setAdContent("TEST AD4");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(), 0);
+		assertEquals(resp.getRespCd(), 201);
 	}
 	
 	//Test to verify if isAdActive returns true
