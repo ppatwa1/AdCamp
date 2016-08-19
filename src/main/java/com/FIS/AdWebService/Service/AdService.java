@@ -75,7 +75,7 @@ public class AdService {
 			}
 			response.setAdInfo(adReq);
 			response.setRespMsg("SUCCESS: Ad Campaigns fetched.");
-			response.setRespCd(Constants.SUCCESS_CD);
+	//		response.setRespCd(Constants.SUCCESS_CD);
 		}
 		return response;
 	}
