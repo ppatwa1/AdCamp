@@ -3,10 +3,7 @@
 
 You will be building a simple web application that allows a user to create ad campaigns. You should demonstrate that your code meets the functional requirements described below via unit and integration tests. There should be instructions for deploying and running the application, ideally expressed via code/configuration and not prose.
 
-Functional Requirements
------------------------
-
-== Create Ad Campaign via HTTP POST
+Create Ad Campaign via HTTP POST
 
  
 A user should be able to create an ad campaign by sending a POST request to the ad server at http://<host>/ad.  The body of the POST request must be a JSON object containing the following data:
@@ -47,6 +44,7 @@ The following are not required but might be nice additions to the exercise.
 
 
 Running the application
+
 - You can run the AdTest.java class as JUnit test
 - It tests creation of new ad campaign for a given partnerId if there are no active campaigns for the partner
 - It tests retrieval of active Ad given a partnerId
@@ -61,6 +59,6 @@ CURL commands:
 
 1. Curl command to create a new Ad: curl -X "POST" "http://localhost:8080/ad/createAd \ -H "Content-Type: application/json"\ -d $'{"partner_id": "Ram", "duration": "40", "ad_content": "Ad by Ram"}'
 
-2. Curl command to get a single Ad: curl -X GET -D headers \ http://localhost:8080/ad/Ram
+2. Curl command to get a single Ad: curl -X GET -D headers http://localhost:8080/ad/Ram
 
-3. Curl command to get all ads: curl -X GET -D headers \ http://localhost:8080/ad/all
+3. Curl command to get all ads: curl -X GET -D headers http://localhost:8080/ad/all
