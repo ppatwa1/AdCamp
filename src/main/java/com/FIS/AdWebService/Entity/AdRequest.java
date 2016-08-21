@@ -13,11 +13,11 @@ public class AdRequest {
 	String ad_content;
 	long adEndTime;
 	
-	public String getPartnerId() {
+	public String getPartner_id() {
 		return partner_id;
 	}
-	public void setPartnerId(String partnerId) {
-		this.partner_id = partnerId;
+	public void setPartner_id(String partner_id) {
+		this.partner_id = partner_id;
 	}
 	public int getDuration() {
 		return duration;
@@ -25,11 +25,11 @@ public class AdRequest {
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-	public String getAdContent() {
+	public String getAd_content() {
 		return ad_content;
 	}
-	public void setAdContent(String adContent) {
-		this.ad_content = adContent;
+	public void setAd_content(String ad_content) {
+		this.ad_content = ad_content;
 	}
 	public long getAdEndTime() {
 		return adEndTime;

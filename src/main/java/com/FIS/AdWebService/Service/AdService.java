@@ -44,17 +44,17 @@ public class AdService {
 	// partner
 	public AdResponse createAd(AdRequest newAd) {
 		AdResponse response = new AdResponse();
-		if (newAd.getDuration() == 0 || newAd.getAdContent() == null || newAd.getPartnerId() == null) {
+		if (newAd.getDuration() == 0 || newAd.getAd_content() == null || newAd.getPartner_id() == null) {
 			response.setRespMsg("Please enter duration greater than 0");
 			response.setRespCd(new Integer(405));
 
 		} else {
-			if (newAd.getPartnerId().toLowerCase() == "all") {
+			if (newAd.getPartner_id().toLowerCase() == "all") {
 				response.setRespMsg("Please enter patner_id other than all");
 				response.setRespCd(new Integer(405));
 			} else {
 				List<AdRequest> adList = new ArrayList<AdRequest>();
-				String partnerId = newAd.getPartnerId();
+				String partnerId = newAd.getPartner_id();
 				long adEndTime = (System.currentTimeMillis() / 1000) + newAd.getDuration();
 				newAd.setAdEndTime(adEndTime);
 				if (adMap.containsKey(partnerId)) {
@@ -68,14 +68,14 @@ public class AdService {
 						adMap.put(partnerId, adList);
 						response.setRespMsg(
 								"Ad Campaign was not active so created a new campaign at - http://localhost:8080/ad/"
-										+ newAd.getPartnerId());
+										+ newAd.getPartner_id());
 						response.setRespCd(new Integer(201));
 					}
 				} else {
 					adList.add(newAd);
 					adMap.put(partnerId, adList);
 					response.setRespMsg(
-							"New Ad Campaign created at - http://localhost:8080/ad/" + newAd.getPartnerId());
+							"New Ad Campaign created at - http://localhost:8080/ad/" + newAd.getPartner_id());
 					response.setRespCd(new Integer(201));
 				}
 			}

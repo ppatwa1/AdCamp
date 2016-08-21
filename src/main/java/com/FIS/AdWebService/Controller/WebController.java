@@ -25,8 +25,8 @@ public class WebController {
 
 	AdService adService = new AdService();
 
-	@RequestMapping(method = RequestMethod.GET, value = "/{partnerId}")
-	public AdResponse getAd(@PathVariable("partnerId") String partnerId) throws IOException {
+	@RequestMapping(method = RequestMethod.GET, value = "/{partner_id}")
+	public AdResponse getAd(@PathVariable("partner_id") String partnerId) throws IOException {
 		return adService.getAd(partnerId);
 	}
 

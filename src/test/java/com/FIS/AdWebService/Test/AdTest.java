@@ -48,7 +48,7 @@ public class AdTest {
 	public void addAdFailure1(){
 		AdRequest request = new AdRequest();
 		request.setDuration(5);
-		request.setAdContent("Partner Id missing");
+		request.setAd_content("Partner Id missing");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
 		assertEquals(resp.getRespCd(),405);
@@ -57,7 +57,7 @@ public class AdTest {
 	@Test
 	public void addAdFailure2(){
 		AdRequest request = new AdRequest();
-		request.setPartnerId("Partner 1");
+		request.setPartner_id("Partner 1");
 		request.setDuration(5);
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
@@ -67,8 +67,8 @@ public class AdTest {
 	@Test
 	public void addAdFailure3(){
 		AdRequest request = new AdRequest();
-		request.setPartnerId("Partner 1");
-		request.setAdContent("Partner Id missing");
+		request.setPartner_id("Partner 1");
+		request.setAd_content("Partner Id missing");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
 		assertEquals(resp.getRespCd(),405);
@@ -78,8 +78,8 @@ public class AdTest {
 	public void addAdFailure4(){
 		AdRequest request = new AdRequest();
 		request.setDuration(5);
-		request.setPartnerId("all");
-		request.setAdContent("Partner Id missing");
+		request.setPartner_id("all");
+		request.setAd_content("Partner Id missing");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
 		assertEquals(resp.getRespCd(),405);
@@ -87,9 +87,9 @@ public class AdTest {
 	
 	public void addAd1Success() {
 		AdRequest request = new AdRequest();
-		request.setPartnerId("Partner_1");
+		request.setPartner_id("Partner_1");
 		request.setDuration(10);
-		request.setAdContent("TEST AD1");
+		request.setAd_content("TEST AD1");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
 	//	System.out.println("Response URL:"  + resp.getRespMsg());
@@ -99,9 +99,9 @@ public class AdTest {
 	
 	public void addAd1Fail() {
 		AdRequest request = new AdRequest();
-		request.setPartnerId("Partner_1");
+		request.setPartner_id("Partner_1");
 		request.setDuration(20);
-		request.setAdContent("TEST AD12");
+		request.setAd_content("TEST AD12");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
 		assertEquals(resp.getRespCd(), 405);
@@ -111,9 +111,9 @@ public class AdTest {
 	public void addAd1AgainSuccess() throws InterruptedException{
 		Thread.sleep(12000);
 		AdRequest request = new AdRequest();
-		request.setPartnerId("Partner_1");
+		request.setPartner_id("Partner_1");
 		request.setDuration(100);
-		request.setAdContent("TEST AD Success");
+		request.setAd_content("TEST AD Success");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
 		assertEquals(resp.getRespCd(), 201);
@@ -123,9 +123,9 @@ public class AdTest {
 	
 	public void addAd2Success() {
 		AdRequest request = new AdRequest();
-		request.setPartnerId("Partner_2");
+		request.setPartner_id("Partner_2");
 		request.setDuration(20);
-		request.setAdContent("TEST AD2");
+		request.setAd_content("TEST AD2");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
 		assertEquals(resp.getRespCd(), 201);
@@ -134,9 +134,9 @@ public class AdTest {
 	
 	public void addAd3Success() {
 		AdRequest request = new AdRequest();
-		request.setPartnerId("Partner_3");
+		request.setPartner_id("Partner_3");
 		request.setDuration(55);
-		request.setAdContent("TEST AD3");
+		request.setAd_content("TEST AD3");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
 		assertEquals(resp.getRespCd(), 201);
@@ -145,9 +145,9 @@ public class AdTest {
 
 	public void addAd4Success() {
 		AdRequest request = new AdRequest();
-		request.setPartnerId("Partner_4");
+		request.setPartner_id("Partner_4");
 		request.setDuration(70);
-		request.setAdContent("TEST AD4");
+		request.setAd_content("TEST AD4");
 		AdResponse resp = new AdResponse();
 		resp = adService.createAd(request);
 		assertEquals(resp.getRespCd(), 201);
