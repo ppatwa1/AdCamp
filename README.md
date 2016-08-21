@@ -54,5 +54,13 @@ Running the application
 
 URL for various features(tested using postman):
 Create a new campaign: http://localhost:8080/ad/createAd
-Get ad data: http://localhost:8080/ad/<partnerId>
+Get ad data: http://localhost:8080/ad/<partner_id>
 Return list of all campaigns: http://localhost:8080/ad/all
+
+CURL commands:
+
+1. Curl command to create a new Ad: curl -X "POST" "http://localhost:8080/ad/createAd \ -H "Content-Type: application/json"\ -d $'{"partner_id": "Ram", "duration": "40", "ad_content": "Ad by Ram"}'
+
+2. Curl command to get a single Ad: curl -X GET -D headers \ http://localhost:8080/ad/Ram
+
+3. Curl command to get all ads: curl -X GET -D headers \ http://localhost:8080/ad/all
