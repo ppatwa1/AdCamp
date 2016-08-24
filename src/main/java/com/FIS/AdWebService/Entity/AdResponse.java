@@ -11,7 +11,6 @@ import java.util.List;
 public class AdResponse {
 
 	String respMsg;
-	int respCd;
 	List<AdRequest> adInfo;
 	
 	public String getRespMsg() {
@@ -19,12 +18,6 @@ public class AdResponse {
 	}
 	public void setRespMsg(String respMsg) {
 		this.respMsg = respMsg;
-	}
-	public int getRespCd() {
-		return respCd;
-	}
-	public void setRespCd(int respCd) {
-		this.respCd = respCd;
 	}
 	public List<AdRequest> getAdInfo() {
 		return adInfo;

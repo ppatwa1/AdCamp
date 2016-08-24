@@ -11,6 +11,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import com.FIS.AdWebService.Entity.AdRequest;
 import com.FIS.AdWebService.Entity.AdResponse;
 
@@ -19,7 +22,7 @@ public class AdService {
 	private ConcurrentHashMap<String, List<AdRequest>> adMap = new ConcurrentHashMap<String, List<AdRequest>>();
 
 	// Method to retrieve active Ad information for a partner based on partnerId
-	public AdResponse getAd(String partnerId) {
+	public ResponseEntity getAd(String partnerId) {
 		List<AdRequest> adList = new ArrayList<AdRequest>();
 		AdResponse response = new AdResponse();
 		if (adMap.containsKey(partnerId)) {
@@ -27,31 +30,29 @@ public class AdService {
 			if (getActiveAdForPartner(partnerId) != null) {
 				adList.add(getActiveAdForPartner(partnerId));
 				response.setAdInfo(adList);
-				// response.setRespMsg("SUCCESS: Ad Campaign found");
-				response.setRespCd(new Integer(200));
+				return new ResponseEntity<>(response,HttpStatus.OK);
 			} else {
 				response.setRespMsg("No Active Ad Campaign found for partnerId -" + partnerId);
-				response.setRespCd(new Integer(404));
+				return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 			}
 		} else {
 			response.setRespMsg("ERROR: Partner Id not found");
-			response.setRespCd(new Integer(404));
+			return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 		}
-		return response;
 	}
 
 	// Method to create a new Ad, also supports adding multiple Ads for a
 	// partner
-	public AdResponse createAd(AdRequest newAd) {
+	public ResponseEntity createAd(AdRequest newAd) {
 		AdResponse response = new AdResponse();
 		if (newAd.getDuration() == 0 || newAd.getAd_content() == null || newAd.getPartner_id() == null) {
 			response.setRespMsg("Please enter duration greater than 0");
-			response.setRespCd(new Integer(405));
+			return new ResponseEntity<>(response,HttpStatus.METHOD_NOT_ALLOWED);
 
 		} else {
 			if (newAd.getPartner_id().toLowerCase() == "all") {
 				response.setRespMsg("Please enter patner_id other than all");
-				response.setRespCd(new Integer(405));
+				return new ResponseEntity<>(response,HttpStatus.METHOD_NOT_ALLOWED);
 			} else {
 				List<AdRequest> adList = new ArrayList<AdRequest>();
 				String partnerId = newAd.getPartner_id();
@@ -61,7 +62,7 @@ public class AdService {
 					if (getActiveAdForPartner(partnerId) != null) {
 						response.setRespMsg("A campaign with Partner Id -" + partnerId
 								+ "  is already running. Please trying creating the campaign later.");
-						response.setRespCd(new Integer(405));
+						return new ResponseEntity<>(response,HttpStatus.METHOD_NOT_ALLOWED);
 					} else {
 						adList = adMap.get(partnerId);
 						adList.add(newAd);
@@ -69,22 +70,21 @@ public class AdService {
 						response.setRespMsg(
 								"Ad Campaign was not active so created a new campaign at - http://localhost:8080/ad/"
 										+ newAd.getPartner_id());
-						response.setRespCd(new Integer(201));
+						return new ResponseEntity<>(response,HttpStatus.CREATED);
 					}
 				} else {
 					adList.add(newAd);
 					adMap.put(partnerId, adList);
 					response.setRespMsg(
 							"New Ad Campaign created at - http://localhost:8080/ad/" + newAd.getPartner_id());
-					response.setRespCd(new Integer(201));
+					return new ResponseEntity<>(response,HttpStatus.CREATED);
 				}
 			}
 		}
-		return response;
 	}
 
 	// Method to get data for all campaigns
-	public AdResponse getAllAd() {
+	public ResponseEntity getAllAd() {
 		AdResponse response = new AdResponse();
 		List<AdRequest> adReq = new ArrayList<AdRequest>();
 		for (List<AdRequest> value : adMap.values()) {
@@ -92,11 +92,9 @@ public class AdService {
 			while (adItr.hasNext()) {
 				adReq.add(adItr.next());
 			}
-			response.setAdInfo(adReq);
-			// response.setRespMsg("SUCCESS: Ad Campaigns fetched.");
-			response.setRespCd(new Integer(200));
 		}
-		return response;
+		response.setAdInfo(adReq);
+		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 
 	// Method to verify if a Ad is active based on currentTime

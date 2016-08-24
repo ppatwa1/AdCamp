@@ -9,6 +9,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.FIS.AdWebService.Application;
@@ -50,8 +52,8 @@ public class AdTest {
 		request.setDuration(5);
 		request.setAd_content("Partner Id missing");
 		AdResponse resp = new AdResponse();
-		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(),405);
+		ResponseEntity<?> response = adService.createAd(request);
+		assertEquals(response.getStatusCode().value(),405);
 	}
 	
 	@Test
@@ -60,8 +62,8 @@ public class AdTest {
 		request.setPartner_id("Partner 1");
 		request.setDuration(5);
 		AdResponse resp = new AdResponse();
-		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(),405);
+		ResponseEntity<?> response = adService.createAd(request);
+		assertEquals(response.getStatusCode().value(),405);
 	}
 	
 	@Test
@@ -70,8 +72,8 @@ public class AdTest {
 		request.setPartner_id("Partner 1");
 		request.setAd_content("Partner Id missing");
 		AdResponse resp = new AdResponse();
-		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(),405);
+		ResponseEntity<?> response = adService.createAd(request);
+		assertEquals(response.getStatusCode().value(),405);
 	}
 	
 	@Test
@@ -80,9 +82,8 @@ public class AdTest {
 		request.setDuration(5);
 		request.setPartner_id("all");
 		request.setAd_content("Partner Id missing");
-		AdResponse resp = new AdResponse();
-		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(),405);
+		ResponseEntity<?> response = adService.createAd(request);
+		assertEquals(response.getStatusCode().value(),405);
 	}
 	
 	public void addAd1Success() {
@@ -90,10 +91,8 @@ public class AdTest {
 		request.setPartner_id("Partner_1");
 		request.setDuration(10);
 		request.setAd_content("TEST AD1");
-		AdResponse resp = new AdResponse();
-		resp = adService.createAd(request);
-	//	System.out.println("Response URL:"  + resp.getRespMsg());
-		assertEquals(resp.getRespCd(), 201);
+		ResponseEntity<?> response = adService.createAd(request);
+		assertEquals(response.getStatusCode().value(),201);
 	}
 	
 	
@@ -102,9 +101,8 @@ public class AdTest {
 		request.setPartner_id("Partner_1");
 		request.setDuration(20);
 		request.setAd_content("TEST AD12");
-		AdResponse resp = new AdResponse();
-		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(), 405);
+		ResponseEntity<?> response = adService.createAd(request);
+		assertEquals(response.getStatusCode().value(),405);
 	}
 	
 	
@@ -114,9 +112,8 @@ public class AdTest {
 		request.setPartner_id("Partner_1");
 		request.setDuration(100);
 		request.setAd_content("TEST AD Success");
-		AdResponse resp = new AdResponse();
-		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(), 201);
+		ResponseEntity<?> response = adService.createAd(request);
+		assertEquals(response.getStatusCode().value(),201);
 	}
 	
 	
@@ -126,9 +123,8 @@ public class AdTest {
 		request.setPartner_id("Partner_2");
 		request.setDuration(20);
 		request.setAd_content("TEST AD2");
-		AdResponse resp = new AdResponse();
-		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(), 201);
+		ResponseEntity<?> response = adService.createAd(request);
+		assertEquals(response.getStatusCode().value(),201);
 	}
 	
 	
@@ -138,8 +134,8 @@ public class AdTest {
 		request.setDuration(55);
 		request.setAd_content("TEST AD3");
 		AdResponse resp = new AdResponse();
-		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(), 201);
+		ResponseEntity<?> response = adService.createAd(request);
+		assertEquals(response.getStatusCode().value(),201);
 	}
 	
 
@@ -149,8 +145,8 @@ public class AdTest {
 		request.setDuration(70);
 		request.setAd_content("TEST AD4");
 		AdResponse resp = new AdResponse();
-		resp = adService.createAd(request);
-		assertEquals(resp.getRespCd(), 201);
+		ResponseEntity<?> response = adService.createAd(request);
+		assertEquals(response.getStatusCode().value(),201);
 	}
 	
 	//Test to verify if isAdActive returns true
@@ -174,19 +170,23 @@ public class AdTest {
 	//Method to retrieve all Ads
 	public void getAllAd()
 	{
-		AdResponse resp = new AdResponse();
-		resp = adService.getAllAd();
-		assertNotNull(resp);
-		assertEquals(resp.getAdInfo().size(),5);
+		ResponseEntity<?> response = adService.getAllAd();
+		assertNotNull(response);
 	}
 	
 	//Method to retrieve a single Ad by passing partnerId
 	public void getAdSuccess()
 	{
-		AdResponse resp = new AdResponse();
-		resp = adService.getAd("Partner_1");
-		assertNotNull(resp);
-		assertEquals(resp.getAdInfo().size(),1);
+		ResponseEntity<?> response = adService.getAd("Partner 1");
+		assertNotNull(response);
 	}
+	
+	@Test
+	public void getAdNotFound()
+	{
+		ResponseEntity<?> response = adService.getAd("1234");
+		assertEquals(response.getStatusCode().value(),404);
+	}
+	
 
 }

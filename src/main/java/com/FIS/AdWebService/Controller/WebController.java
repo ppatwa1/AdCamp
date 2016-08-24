@@ -9,6 +9,7 @@ package com.FIS.AdWebService.Controller;
 
 import java.io.IOException;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.FIS.AdWebService.Entity.AdRequest;
-import com.FIS.AdWebService.Entity.AdResponse;
 import com.FIS.AdWebService.Service.AdService;
 
 @RestController
@@ -26,17 +26,17 @@ public class WebController {
 	AdService adService = new AdService();
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{partner_id}")
-	public AdResponse getAd(@PathVariable("partner_id") String partnerId) throws IOException {
+	public ResponseEntity<?> getAd(@PathVariable("partner_id") String partnerId) throws IOException {
 		return adService.getAd(partnerId);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/createAd")
-	public AdResponse createAd(@RequestBody AdRequest newAd) throws IOException {
+	public ResponseEntity<?> createAd(@RequestBody AdRequest newAd) throws IOException {
 		return adService.createAd(newAd);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/all")
-	public AdResponse getAllAd() throws IOException {
+	public ResponseEntity<?> getAllAd() throws IOException {
 		return adService.getAllAd();
 	}
 }
